@@ -7,14 +7,17 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/font-awesome/scss/font-awesome";
+.fa-spin { -webkit-filter: blur(0); }
 
 @import "fonts";
+@import "forms";
 
 * {
   word-wrap: break-word;
   margin: 0;
   padding: 0;
-  -webkit-font-smoothing: antialiased;
+  //-webkit-font-smoothing: antialiased;
   outline: none;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -25,8 +28,8 @@
 body {
   background: #fff;
   font-family: 'Titillium', monospace;
-  font-weight: 300;
-  font-size: 25px;
+  font-weight: normal;
+  font-size: 16px;
 }
 
 header {
@@ -42,6 +45,8 @@ header {
   top: 0;
   width: 100%;
   min-height: 800px;
+  font-size: 25px;
+
   & > h1 {
     color: #FFF;
     display: block;
