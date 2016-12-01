@@ -36,8 +36,8 @@ class CreateDevicesTable extends Migration
             $table->integer('device_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('users')->on('id')->onDelete('cascade');
-            $table->foreign('device_id')->references('devices')->on('id')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('device_id')->references('id')->on('devices')->onDelete('cascade');
         });
 
         Schema::create('user_social_platforms', function (Blueprint $table) {
@@ -47,8 +47,8 @@ class CreateDevicesTable extends Migration
             $table->string('profile')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('users')->on('id')->onDelete('cascade');
-            $table->foreign('social_platform_id')->references('socials_platforms')->on('id')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('social_platform_id')->references('id')->on('socials_platforms')->onDelete('cascade');
         });
 
         Schema::create('user_interests', function (Blueprint $table) {
@@ -57,8 +57,8 @@ class CreateDevicesTable extends Migration
             $table->integer('interest_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('users')->on('id')->onDelete('cascade');
-            $table->foreign('interest_id')->references('interests')->on('id')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('interest_id')->references('id')->on('interests')->onDelete('cascade');
         });
     }
 
