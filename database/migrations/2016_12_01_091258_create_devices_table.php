@@ -48,7 +48,7 @@ class CreateDevicesTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('social_platform_id')->references('id')->on('socials_platforms')->onDelete('cascade');
+            $table->foreign('social_platform_id')->references('id')->on('social_platforms')->onDelete('cascade');
         });
 
         Schema::create('user_interests', function (Blueprint $table) {
