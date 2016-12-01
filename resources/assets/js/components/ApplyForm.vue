@@ -212,7 +212,7 @@
                 errors: [],
                 error_inputs: [],
                 success: false
-            };
+            }
         },
         created() {
             this.loadFormData();
@@ -288,6 +288,6 @@
                     social_platforms: socials
                 };
             }
-        },
+        }
     }
 </script>
