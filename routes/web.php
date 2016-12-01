@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
-Route::get('/apply', 'Apply@index')->name('apply');
+Route::get('/', 'Apply@index')->name('apply');

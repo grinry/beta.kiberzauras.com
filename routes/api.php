@@ -18,4 +18,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 
-Route::get('/devices', 'ApiController@devices');
+Route::get('/form-data', 'ApiController@formData');
+Route::post('/register', 'ApiController@register');
