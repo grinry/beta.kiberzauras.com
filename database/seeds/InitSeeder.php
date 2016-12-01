@@ -50,6 +50,7 @@ class InitSeeder extends Seeder
 
     protected function truncateTables()
     {
+        Schema::disableForeignKeyConstraints();
         DB::table('users')->truncate();
         DB::table('password_resets')->truncate();
         DB::table('notifications')->truncate();
