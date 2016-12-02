@@ -15,4 +15,6 @@
     return view('welcome');
 });*/
 
-Route::get('/', 'Apply@index')->name('apply');
+Route::get('/', 'Apply@index')->name('register');
+Route::get('/reassign', 'Apply@close')->name('close');
+Route::get('/reassign/{id}', 'Apply@closeReturn')->name('close.return');

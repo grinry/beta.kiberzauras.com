@@ -10926,4 +10926,12 @@ header > h1 > span {
   content: '';
 }
 
+.terms-and-conditions {
+  max-height: 200px;
+  border: 1px solid #ccc;
+  background: #f2f2f2;
+  padding: 6px;
+  overflow: auto;
+}
+
 /*# sourceMappingURL=app.css.map */

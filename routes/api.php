@@ -20,3 +20,5 @@ use Illuminate\Http\Request;
 
 Route::get('/form-data', 'ApiController@formData');
 Route::post('/register', 'ApiController@register');
+Route::post('/reassign', 'ApiController@reassign');
+Route::get('/agreement', 'ApiController@agreement');

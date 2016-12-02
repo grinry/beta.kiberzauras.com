@@ -18,5 +18,8 @@
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3",
     "gulp-uglify": "^2.0.0"
+  },
+  "dependencies": {
+    "marked": "^0.3.6"
   }
 }

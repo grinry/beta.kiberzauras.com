@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 /**
  * Class Apply
  * @package App\Http\Controllers
@@ -20,10 +18,24 @@ class Apply extends Controller
         return view('apply.index');
     }
 
-    public function submit(Request $request)
+    /**
+     * @todo
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author Rytis Grincevicius <rytis@inlu.net>
+     */
+    public function close()
     {
-        $this->validate($request, []);
+        return view('close.index');
+    }
 
-
+    /**
+     * @todo
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author Rytis Grincevicius <rytis@inlu.net>
+     */
+    public function closeReturn($id)
+    {
+        return view('close.return');
     }
 }

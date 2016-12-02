@@ -146,15 +146,23 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Agreements</div>
 
-                        <div class="panel-body">
+                        <div class="panel-body" v-if="agreementFailed">
+                            <div class="row">
+                                <div class="col-sm-12 text-justify">
+                                    <p v-if="agreementLoading">
+                                        Loading, please wait...
+                                    </p>
+                                    <p v-else>
+                                        Failed to download agreement. <a href="#" @click.prevent="loadAgreements()">Please click here to download again.</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body" v-else>
 
                             <div class="row">
                                 <div class="col-sm-12 text-justify">
-                                    <p>
-                                        By clicking "Apply" you agree, that all your personal information is correct and You allow
-                                        us to send invites to test our software to your email {{ form.email }} or provided
-                                        phone number.
-                                    </p>
+                                    <div class="terms-and-conditions" v-html="agreementHtml"></div>
                                 </div>
                             </div>
 
@@ -202,6 +210,7 @@
 </template>
 
 <script lang="babel">
+    import marked from 'marked';
     export default {
         name: 'apply-form',
         data() {
@@ -226,11 +235,15 @@
                 loadingData: false,
                 errors: [],
                 error_inputs: [],
-                success: false
+                success: false,
+                agreementHtml: null,
+                agreementLoading: false,
+                agreementFailed: true
             }
         },
         created() {
             this.loadFormData();
+            this.loadAgreements();
         },
         methods: {
             loadFormData() {
@@ -245,6 +258,19 @@
                             this.loadingData = false;
                         }).catch(error => {
                             this.loadingData = true
+                        });
+            },
+            loadAgreements() {
+                this.agreementLoading = true;
+                this.$http.get('/api/agreement')
+                        .then(response => {
+                            this.agreementHtml = marked(response.body, { sanitize: true });
+                            this.agreementLoading = false;
+                            this.agreementFailed = false;
+                        }).catch(error => {
+                            console.log(error);
+                            this.agreementLoading = false;
+                            this.agreementFailed = true;
                         });
             },
             submit(e) {

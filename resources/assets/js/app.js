@@ -14,6 +14,8 @@ require('./bootstrap');
  */
 
 Vue.component('apply-form', require('./components/ApplyForm.vue'));
+Vue.component('close-form', require('./components/ReassignForm.vue'));
+Vue.component('close-return', require('./components/ReassignAccept.vue'));
 
 const app = new Vue({
     el: '.app'

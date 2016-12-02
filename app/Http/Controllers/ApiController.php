@@ -9,6 +9,7 @@ use App\Models\SocialPlatform;
 use App\Models\User;
 use App\Notifications\AccountCreated;
 use Carbon\Carbon;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -96,6 +97,15 @@ class ApiController extends Controller {
             'interests' =>  $this->interests(),
             'countries' =>  $this->countries()
         ]);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @author Rytis Grincevicius <rytis@inlu.net>
+     */
+    public function agreement()
+    {
+        return response(File::get(storage_path('agreement.md')));
     }
 
     /**
