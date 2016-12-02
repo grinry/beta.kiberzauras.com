@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Device;
 use App\Models\Interest;
 use App\Models\SocialPlatform;
@@ -48,7 +49,8 @@ class ApiController extends Controller {
             'social_platforms.*.id'   =>  'required|exists:social_platforms,id',
             'social_platforms.*.profile'   =>  'sometimes|url|nullable',
             'agreement'     =>  'required:is:1',
-            'newsletter'    =>  'boolean'
+            'newsletter'    =>  'boolean',
+            'country'       =>  'required|exists:countries,id'
         ], $messages);
 
 
@@ -58,13 +60,14 @@ class ApiController extends Controller {
             'first_name'    =>  $request->input('first_name'),
             'last_name'    =>  $request->input('last_name'),
             'gender'    =>  $request->input('gender'),
-            'birthday'    =>  $request->input('gender'),
+            'birthday'    =>  $request->input('birthday'),
             'email'    =>  $request->input('email'),
             'phone_number'    =>  $number != '+' ? $number : null,
             'applied'   =>  true,
             'newsletter' =>  $request->input('newsletter', false),
             'agreement_at'  =>  Carbon::now(),
-            'password'  =>  bcrypt(str_random())
+            'password'  =>  bcrypt(str_random()),
+            'country_id'   => $request->input('country')
         ];
 
         if ($user = User::create($data)) {
@@ -90,7 +93,8 @@ class ApiController extends Controller {
             'gender'    =>  $this->genders(),
             'devices'   =>  $this->devices(),
             'social_platforms'  =>  $this->socialPlatforms(),
-            'interests' =>  $this->interests()
+            'interests' =>  $this->interests(),
+            'countries' =>  $this->countries()
         ]);
     }
 
@@ -112,7 +116,7 @@ class ApiController extends Controller {
      */
     protected function devices()
     {
-        return Device::all('id', 'name')->transform(function($item) {
+        return Device::orderBy('name')->get(['id', 'name'])->transform(function($item) {
             return [
                 'key'       =>  $item->id,
                 'value'     =>  $item->name,
@@ -127,7 +131,7 @@ class ApiController extends Controller {
      */
     protected function socialPlatforms()
     {
-        return SocialPlatform::all('id', 'name')->transform(function($item) {
+        return SocialPlatform::orderBy('name')->get(['id', 'name'])->transform(function($item) {
             return [
                 'key'       =>  $item->id,
                 'value'     =>  $item->name,
@@ -143,7 +147,22 @@ class ApiController extends Controller {
      */
     protected function interests()
     {
-        return Interest::all('id', 'name')->transform(function($item) {
+        return Interest::orderBy('name')->get(['id', 'name'])->transform(function($item) {
+            return [
+                'key'       =>  $item->id,
+                'value'     =>  $item->name,
+                'selected'  =>  false
+            ];
+        });
+    }
+
+    /**
+     * @return Collection
+     * @author Rytis Grincevicius <rytis@inlu.net>
+     */
+    protected function countries()
+    {
+        return Country::orderBy('name')->get(['id', 'name'])->transform(function($item) {
             return [
                 'key'       =>  $item->id,
                 'value'     =>  $item->name,

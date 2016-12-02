@@ -80,4 +80,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(SocialPlatform::class, 'user_social_platforms')->withPivot(['profile']);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @author Rytis Grincevičius <rytis.grincevicius@gmail.com>
+     */
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

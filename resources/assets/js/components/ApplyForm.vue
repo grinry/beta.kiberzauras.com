@@ -30,7 +30,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Gender</label>
-                                        <select class="form-control" v-model="form.gender" :options="gender">
+                                        <select class="form-control" v-model="form.gender">
                                             <option v-for="(option, key) in gender" :value="key">
                                                 {{ option }}
                                             </option>
@@ -56,6 +56,19 @@
                                     <div class="form-group">
                                         <label>Phone number <span>(optional)</span></label>
                                         <input type="text" class="form-control" placeholder="Phone number" v-model="form.phone_number">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        <select class="form-control" v-model="form.country">
+                                            <option v-for="country in countries" :value="country.key">
+                                                {{ country.value }}
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -201,12 +214,14 @@
                     email: null,
                     phone_number: '+',
                     agree: false,
-                    newsletter: false
+                    newsletter: false,
+                    country: null,
                 },
                 devices: [],
                 social_platforms: [],
                 interests: [],
                 gender: [],
+                countries: [],
                 submited: false,
                 loadingData: false,
                 errors: [],
@@ -226,9 +241,9 @@
                             this.social_platforms = response.social_platforms;
                             this.interests = response.interests;
                             this.gender = response.gender;
+                            this.countries = response.countries;
                             this.loadingData = false;
                         }).catch(error => {
-                            console.log(error);
                             this.loadingData = true
                         });
             },
@@ -283,6 +298,7 @@
                     phone_number: this.form.phone_number,
                     agreement: this.form.agree,
                     newsletter: this.form.newsletter,
+                    country: this.form.country,
                     devices: devices,
                     interests: interests,
                     social_platforms: socials
